@@ -26,7 +26,7 @@ class PromisseHandle {
       reject(err)
       return
     }
-    
+
     resolve()
   }
   _requestCallback(error, response, body) {
