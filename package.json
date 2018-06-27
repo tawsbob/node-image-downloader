@@ -1,0 +1,34 @@
+{
+  "name": "node-image-downloader",
+  "version": "1.0.0",
+  "description": "simple and lightweight image downloader for nodejs",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.13.6"
+  },
+  "scripts": {
+    "prettier": "node ./node_modules/prettier/bin-prettier.js --single-quote --trailing-comma es5 --no-semi --write \"src/**/*.js\""
+  },
+  "precommit": [
+    "prettier"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tawsbob/node-image-downloader.git"
+  },
+  "keywords": [
+    "downloader",
+    "image",
+    "nodejs"
+  ],
+  "author": "Dellean Santos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tawsbob/node-image-downloader/issues"
+  },
+  "homepage": "https://github.com/tawsbob/node-image-downloader#readme"
+}
