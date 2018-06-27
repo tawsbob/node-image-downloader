@@ -33,6 +33,7 @@ imageDownloader({
 ## Contacts
 
 [My Linkedin - Dellean Santos](https://www.linkedin.com/in/delleansantos/)
+
 [Github Profile - @tawsbob](https://github.com/tawsbob/gpu-scrapper/blob/ba2aa5403852374be79e0ee878c7384042a130e0/src/utils/imageDownloader.js)
 
 ## License

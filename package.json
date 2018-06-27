@@ -25,7 +25,7 @@
     "image",
     "nodejs"
   ],
-  "author": "Dellean Santos",
+  "author": "Dellean Santos <dellean.santos@gmail.com> (https://github.com/tawsbob/node-image-downloader/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tawsbob/node-image-downloader/issues"
