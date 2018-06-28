@@ -1,6 +1,7 @@
 const request = require('request')
 const path = require('path')
 const fs = require('fs')
+const mime = require('mime-types')
 
 class PromisseHandle {
   constructor({ uri, dest, filename, fileExtension }) {
@@ -39,13 +40,16 @@ class PromisseHandle {
   _requestCallback(error, response, body) {
     const { resolve, reject } = this.promise
     const { dest, filename, fileExtension } = this.downloadParams
+    const { headers, statusCode } = response
+
 
     if (error) {
       reject(error, response, body)
       return
     }
 
-    this.fileInfo.path = path.join(dest, filename) + `.${fileExtension}`
+    const ext = mime.extension(headers['content-type'])
+    this.fileInfo.path = path.join(dest, filename) + `.${ext || fileExtension}`
     this.fileInfo.size = `${body.length / 1000}kb`
 
     fs.writeFile(this.fileInfo.path, body, 'binary', this.writeFileCallback)

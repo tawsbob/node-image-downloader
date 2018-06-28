@@ -4,6 +4,7 @@
   "description": "simple and lightweight image downloader for nodejs",
   "main": "index.js",
   "dependencies": {
+    "mime-types": "^2.1.18",
     "request": "^2.87.0"
   },
   "devDependencies": {
