@@ -63,5 +63,4 @@ typings/
 # downloads folder
 downloads/
 
-# .DS_Store
 *.DS_Store

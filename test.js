@@ -7,8 +7,8 @@ imageDownloader({
   filename: 'download', //name of file
   fileExtension: 'jpg', //extension of file
 })
-  .then(() => {
-    console.log('all done')
+  .then((response) => {
+    console.log('all done', response)
   })
   .catch((error, response, body) => {
     console.log('something goes bad!')

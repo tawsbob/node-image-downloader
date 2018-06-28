@@ -12,8 +12,10 @@ class PromisseHandle {
       uri,
       dest,
       filename,
-      fileExtension,
+      fileExtension
     }
+
+    this.destinationFullPath = null
 
     this.RejectOrResolve = this._RejectOrResolve.bind(this)
     this.requestCallback = this._requestCallback.bind(this)
@@ -27,8 +29,12 @@ class PromisseHandle {
       return
     }
 
-    resolve()
+    resolve({
+      savedAt: Date.now(),
+      path: this.destinationFullPath
+    })
   }
+
   _requestCallback(error, response, body) {
     const { resolve, reject } = this.promise
     const { dest, filename, fileExtension } = this.downloadParams
@@ -38,8 +44,9 @@ class PromisseHandle {
       return
     }
 
-    const destination = path.join(dest, filename) + `.${fileExtension}`
-    fs.writeFile(destination, body, 'binary', this.writeFileCallback)
+    this.destinationFullPath = path.join(dest, filename) + `.${fileExtension}`
+
+    fs.writeFile(this.destinationFullPath, body, 'binary', this.writeFileCallback)
   }
 
   _RejectOrResolve(resolve, reject) {
