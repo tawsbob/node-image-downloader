@@ -12,7 +12,7 @@ class PromisseHandle {
       uri,
       dest,
       filename,
-      fileExtension
+      fileExtension,
     }
 
     this.destinationFullPath = null
@@ -31,7 +31,7 @@ class PromisseHandle {
 
     resolve({
       savedAt: Date.now(),
-      path: this.destinationFullPath
+      path: this.destinationFullPath,
     })
   }
 
@@ -46,7 +46,12 @@ class PromisseHandle {
 
     this.destinationFullPath = path.join(dest, filename) + `.${fileExtension}`
 
-    fs.writeFile(this.destinationFullPath, body, 'binary', this.writeFileCallback)
+    fs.writeFile(
+      this.destinationFullPath,
+      body,
+      'binary',
+      this.writeFileCallback
+    )
   }
 
   _RejectOrResolve(resolve, reject) {
