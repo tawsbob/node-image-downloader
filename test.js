@@ -2,7 +2,7 @@ const imageDownloader = require('./src/image-downloader.js')
 
 imageDownloader({
   uri:
-    'https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg',
+    'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
   dest: './downloads', //destination folder
   filename: 'download', //name of file
   fileExtension: 'jpg', //extension of file

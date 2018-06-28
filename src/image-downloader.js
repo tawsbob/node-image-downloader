@@ -15,7 +15,11 @@ class PromisseHandle {
       fileExtension,
     }
 
-    this.destinationFullPath = null
+    this.fileInfo = {
+      path: null,
+      savedAt: null,
+      size: null
+    }
 
     this.RejectOrResolve = this._RejectOrResolve.bind(this)
     this.requestCallback = this._requestCallback.bind(this)
@@ -28,11 +32,8 @@ class PromisseHandle {
       reject(err)
       return
     }
-
-    resolve({
-      savedAt: Date.now(),
-      path: this.destinationFullPath,
-    })
+    this.fileInfo.savedAt = Date.now()
+    resolve(this.fileInfo)
   }
 
   _requestCallback(error, response, body) {
@@ -44,10 +45,11 @@ class PromisseHandle {
       return
     }
 
-    this.destinationFullPath = path.join(dest, filename) + `.${fileExtension}`
+    this.fileInfo.path = path.join(dest, filename) + `.${fileExtension}`
+    this.fileInfo.size = `${body.length/1000}kb`
 
     fs.writeFile(
-      this.destinationFullPath,
+      this.fileInfo.path,
       body,
       'binary',
       this.writeFileCallback
