@@ -18,7 +18,7 @@ class PromisseHandle {
     this.fileInfo = {
       path: null,
       savedAt: null,
-      size: null
+      size: null,
     }
 
     this.RejectOrResolve = this._RejectOrResolve.bind(this)
@@ -46,14 +46,9 @@ class PromisseHandle {
     }
 
     this.fileInfo.path = path.join(dest, filename) + `.${fileExtension}`
-    this.fileInfo.size = `${body.length/1000}kb`
+    this.fileInfo.size = `${body.length / 1000}kb`
 
-    fs.writeFile(
-      this.fileInfo.path,
-      body,
-      'binary',
-      this.writeFileCallback
-    )
+    fs.writeFile(this.fileInfo.path, body, 'binary', this.writeFileCallback)
   }
 
   _RejectOrResolve(resolve, reject) {
