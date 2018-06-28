@@ -13,9 +13,9 @@ imageDownloader({
   filename: 'download', //name of file
   fileExtension: 'jpg', //extension of file
 })
-  .then(() => {
-    console.log('all done')
-  })
+.then((info) => {
+  console.log('all done', info)
+})
   .catch((error, response, body) => {
     console.log('something goes bad!')
     console.log(error)
