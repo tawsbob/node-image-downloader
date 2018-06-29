@@ -42,7 +42,6 @@ class PromisseHandle {
     const { dest, filename, fileExtension } = this.downloadParams
     const { headers, statusCode } = response
 
-
     if (error) {
       reject(error, response, body)
       return
