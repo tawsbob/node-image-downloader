@@ -12,6 +12,7 @@
     "prettier": "^1.13.6"
   },
   "scripts": {
+    "test": "node test.js",
     "prettier": "node ./node_modules/prettier/bin-prettier.js --single-quote --trailing-comma es5 --no-semi --write \"src/**/*.js\""
   },
   "precommit": [
