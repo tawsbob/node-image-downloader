@@ -55,12 +55,18 @@ class PromisseHandle {
 
     const findExt = href.match(findFileExtReg)
     const findFileNameInUrl = href.match(clearUrlToFileNameReg)
-    const filenameFinal = (findFileNameInUrl && findFileNameInUrl[0]) ? findFileNameInUrl[0].replace(clearExtReg,'') : null
-    const finalExt = (findExt && findExt[0]) ? findExt[0].replace(removeParamsReg,'') : mime.extension(headers['content-type'])
+    const filenameFinal =
+      findFileNameInUrl && findFileNameInUrl[0]
+        ? findFileNameInUrl[0].replace(clearExtReg, '')
+        : null
+    const finalExt =
+      findExt && findExt[0]
+        ? findExt[0].replace(removeParamsReg, '')
+        : mime.extension(headers['content-type'])
 
     const finalPath = path.join(dest, filenameFinal + `.${finalExt}`)
 
-    this.fileInfo.path = path.join(dest, filenameFinal+ `.${finalExt}`)
+    this.fileInfo.path = path.join(dest, filenameFinal + `.${finalExt}`)
     this.fileInfo.size = `${body.length / 1000}kb`
 
     fs.writeFile(this.fileInfo.path, body, 'binary', this.writeFileCallback)
@@ -71,17 +77,13 @@ class PromisseHandle {
     this.promise.resolve = resolve
     this.promise.reject = reject
 
-
     request(uri, { encoding: 'binary' }, this.requestCallback)
-
   }
 }
-
 
 function ImageDownloader({ uri, dest, filename, fileExtension }) {
   if (uri && dest) {
     if (typeof uri === 'object') {
-
       let Allpromises = []
 
       for (var i = 0; i < uri.length; i++) {
@@ -90,12 +92,10 @@ function ImageDownloader({ uri, dest, filename, fileExtension }) {
       }
 
       return Promise.all(Allpromises)
-
     } else {
       const handdle = new PromisseHandle({ uri, dest, filename, fileExtension })
       return new Promise(handdle.RejectOrResolve)
     }
-
   } else {
     throw new TypeError('uri and dest params is required')
   }
