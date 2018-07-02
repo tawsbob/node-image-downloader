@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+ - 2.2
+ - jruby
+ - rbx-3
+sudo: enabled
+language: node_js
+os: osx
