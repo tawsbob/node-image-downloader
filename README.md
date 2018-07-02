@@ -23,11 +23,30 @@ imageDownloader({
 
 ```
 
+## Or downloading multiple files
+
+```javascript
+imageDownloader({
+  uri: [
+    'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    'https://s.cdpn.io/3/kiwi.svg'
+  ],
+  dest: './downloads', //destination folder
+})
+  .then((info) => {
+    console.log('all done', info)
+  })
+  .catch((error, response, body) => {
+    console.log('something goes bad!')
+    console.log(error)
+  })
+```
+
 ## Roadmap
 
 - [ ] Validations (file extensions, valid url, etc ...)
 - [ ] Download Progress
-- [ ] Download Queue for multiples images
+- [x] Download Queue for multiples images
 - [ ] Tests
 
 ## Contacts

@@ -1,12 +1,11 @@
 const imageDownloader = require('./src/image-downloader.js')
 
 imageDownloader({
-  /*uri:
-    'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',*/
-    uri: 'https://s.cdpn.io/3/kiwi.svg',
+  uri: [
+    'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    'https://s.cdpn.io/3/kiwi.svg'
+  ],
   dest: './downloads', //destination folder
-  filename: 'download', //name of file
-  fileExtension: 'jpg', //extension of file
 })
   .then((info) => {
     console.log('all done', info)
@@ -15,3 +14,5 @@ imageDownloader({
     console.log('something goes bad!')
     console.log(error)
   })
+
+  //console.log( path.join( './downloads', 'kiwi' ) )
