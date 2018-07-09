@@ -19,5 +19,3 @@ imageDownloader({
     console.log('something goes bad!')
     console.log(error)
   })
-
-  //console.log( path.join( './downloads', 'kiwi' ) )

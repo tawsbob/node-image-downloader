@@ -38,41 +38,48 @@ class PromisseHandle {
   }
 
   _requestCallback(error, response, body) {
-    const { resolve, reject } = this.promise
-    const { dest, filename, fileExtension } = this.downloadParams
-    const { headers, statusCode, request } = response
-    const { href } = request.uri
 
     if (error) {
       reject(error, response, body)
       return
     }
 
-    const removeParamsReg = /\?(?=[^?]*$).+|\/|\./g
-    const clearExtReg = /\.(?=[^.]*$).+|\//g
-    const clearUrlToFileNameReg = /\/(?=[^/]*$).+/g
-    const findFileExtReg = /\.(?=[^.\/\-]*$).+/g
+    const { resolve, reject } = this.promise
+    const { dest, filename, fileExtension } = this.downloadParams
 
-    const findExt = href.match(findFileExtReg)
-    const findFileNameInUrl = href.match(clearUrlToFileNameReg)
-    const filenameFinal =
-      typeof filename === 'string'
-        ? filename
-        : findFileNameInUrl && findFileNameInUrl[0]
-          ? findFileNameInUrl[0].replace(clearExtReg, '')
-          : Date.now()
+    if (body) {
+      const { headers, statusCode, request } = response
+      const { href } = request.uri
 
-    const finalExt =
-      findExt && findExt[0]
-        ? findExt[0].replace(removeParamsReg, '')
-        : mime.extension(headers['content-type'])
+      const removeParamsReg = /\?(?=[^?]*$).+|\/|\./g
+      const clearExtReg = /\.(?=[^.]*$).+|\//g
+      const clearUrlToFileNameReg = /\/(?=[^/]*$).+/g
+      const findFileExtReg = /\.(?=[^.\/\-]*$).+/g
 
-    const finalPath = path.join(dest, filenameFinal + `.${finalExt}`)
+      const findExt = href.match(findFileExtReg)
+      const findFileNameInUrl = href.match(clearUrlToFileNameReg)
+      const filenameFinal =
+        typeof filename === 'string'
+          ? filename
+          : findFileNameInUrl && findFileNameInUrl[0]
+            ? findFileNameInUrl[0].replace(clearExtReg, '')
+            : Date.now()
 
-    this.fileInfo.path = path.join(dest, filenameFinal + `.${finalExt}`)
-    this.fileInfo.size = `${body.length / 1000}kb`
+      const finalExt =
+        findExt && findExt[0]
+          ? findExt[0].replace(removeParamsReg, '')
+          : mime.extension(headers['content-type'])
 
-    fs.writeFile(this.fileInfo.path, body, 'binary', this.writeFileCallback)
+      const finalPath = path.join(dest, filenameFinal + `.${finalExt}`)
+
+      this.fileInfo.path = path.join(dest, filenameFinal + `.${finalExt}`)
+      this.fileInfo.size = `${body.length / 1000}kb`
+
+      fs.writeFile(this.fileInfo.path, body, 'binary', this.writeFileCallback)
+
+    }
+
+
   }
 
   _RejectOrResolve(resolve, reject) {
