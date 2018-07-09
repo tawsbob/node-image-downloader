@@ -1,35 +1,22 @@
 # node-image-downloader
 Simple and lightweight **image downloader** module for nodejs 😉
 
-## Usage
+## requires nodejs v8+
+
+### Usage
 
 ```javascript
 const imageDownloader = require('node-image-downloader')
 
 imageDownloader({
-  uri:
-    'https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg',
-  dest: './downloads', //destination folder
-  filename: 'download', //name of file
-  fileExtension: 'jpg', //extension of file
-})
-.then((info) => {
-  console.log('all done', info)
-})
-  .catch((error, response, body) => {
-    console.log('something goes bad!')
-    console.log(error)
-  })
-
-```
-
-## Or downloading multiple files
-
-```javascript
-imageDownloader({
-  uri: [
-    'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    'https://s.cdpn.io/3/kiwi.svg'
+  imgs: [
+    {
+      uri: 'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+      filename: 'my-image-file-name'
+    },
+    {
+      uri: 'https://s.cdpn.io/3/kiwi.svg' // in this case filename will be kiwi.svg
+    }
   ],
   dest: './downloads', //destination folder
 })
@@ -40,9 +27,10 @@ imageDownloader({
     console.log('something goes bad!')
     console.log(error)
   })
+
 ```
 
-## Roadmap
+### Roadmap
 
 - [ ] Validations (file extensions, valid url, etc ...)
 - [ ] Download Progress

@@ -51,14 +51,17 @@ class PromisseHandle {
     const removeParamsReg = /\?(?=[^?]*$).+|\/|\./g
     const clearExtReg = /\.(?=[^.]*$).+|\//g
     const clearUrlToFileNameReg = /\/(?=[^/]*$).+/g
-    const findFileExtReg = /\.(?=[^.]*$).+/g
+    const findFileExtReg = /\.(?=[^.\/\-]*$).+/g
 
     const findExt = href.match(findFileExtReg)
     const findFileNameInUrl = href.match(clearUrlToFileNameReg)
     const filenameFinal =
-      findFileNameInUrl && findFileNameInUrl[0]
-        ? findFileNameInUrl[0].replace(clearExtReg, '')
-        : null
+      typeof filename === 'string'
+        ? filename
+        : findFileNameInUrl && findFileNameInUrl[0]
+          ? findFileNameInUrl[0].replace(clearExtReg, '')
+          : Date.now()
+
     const finalExt =
       findExt && findExt[0]
         ? findExt[0].replace(removeParamsReg, '')
@@ -81,23 +84,21 @@ class PromisseHandle {
   }
 }
 
-function ImageDownloader({ uri, dest, filename, fileExtension }) {
-  if (uri && dest) {
-    if (typeof uri === 'object') {
+function ImageDownloader({ imgs, dest, filename, fileExtension }) {
+  if (imgs && dest) {
+    if (typeof imgs === 'object' && imgs.length) {
       let Allpromises = []
 
-      for (var i = 0; i < uri.length; i++) {
-        const handdle = new PromisseHandle({ uri: uri[i], dest })
+      for (var i = 0; i < imgs.length; i++) {
+        const { uri, filename } = imgs[i]
+        const handdle = new PromisseHandle({ uri, filename, dest })
         Allpromises.push(new Promise(handdle.RejectOrResolve))
       }
 
       return Promise.all(Allpromises)
-    } else {
-      const handdle = new PromisseHandle({ uri, dest, filename, fileExtension })
-      return new Promise(handdle.RejectOrResolve)
     }
   } else {
-    throw new TypeError('uri and dest params is required')
+    throw new TypeError('imgs and dest params is required')
   }
 }
 
