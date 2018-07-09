@@ -38,7 +38,6 @@ class PromisseHandle {
   }
 
   _requestCallback(error, response, body) {
-
     if (error) {
       reject(error, response, body)
       return
@@ -76,10 +75,7 @@ class PromisseHandle {
       this.fileInfo.size = `${body.length / 1000}kb`
 
       fs.writeFile(this.fileInfo.path, body, 'binary', this.writeFileCallback)
-
     }
-
-
   }
 
   _RejectOrResolve(resolve, reject) {
