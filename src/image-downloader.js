@@ -38,7 +38,6 @@ class PromisseHandle {
   }
 
   _requestCallback(error, response, body) {
-    
     const { reject } = this.promise
     const { dest, filename, fileExtension } = this.downloadParams
 
