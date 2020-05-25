@@ -72,6 +72,7 @@ class PromisseHandle {
       const finalPath = path.join(dest, filenameFinal + `.${finalExt}`)
 
       this.fileInfo.path = finalPath
+      this.fileInfo.name = filenameFinal + `.${finalExt}`
       this.fileInfo.size = `${body.length / 1000}kb`
 
       fs.writeFile(this.fileInfo.path, body, 'binary', this.writeFileCallback)
