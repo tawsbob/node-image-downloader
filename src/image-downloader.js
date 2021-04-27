@@ -80,7 +80,7 @@ class PromisseHandle {
   }
 
   _RejectOrResolve(resolve, reject) {
-    const { uri } = this.downloadParams
+    const { uri,headers } = this.downloadParams
     this.promise.resolve = resolve
     this.promise.reject = reject
 
