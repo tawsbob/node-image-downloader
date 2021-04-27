@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const mime = require('mime-types')
 
-class PromisseHandle {
+class PromiseHandle {
   constructor({ uri, dest, filename, fileExtension, headers }) {
     this.promise = {
       resolve: null,
@@ -80,14 +80,11 @@ class PromisseHandle {
   }
 
   _RejectOrResolve(resolve, reject) {
-    const { uri,headers } = this.downloadParams
+    const { uri, headers } = this.downloadParams
     this.promise.resolve = resolve
     this.promise.reject = reject
 
-    const defaultHeaders = {encoding: 'binary'};
-    const combinedHeaders = {...defaultHeaders, ...headers }
-
-    request(uri, combinedHeaders, this.requestCallback)
+    request({ uri, headers, encoding: 'binary' }, this.requestCallback);
   }
 }
 
@@ -98,8 +95,8 @@ function ImageDownloader({ imgs, dest, headers = {} }) {
 
       for (var i = 0; i < imgs.length; i++) {
         const { uri, filename } = imgs[i]
-        const handdle = new PromisseHandle({ uri, filename, dest, headers })
-        Allpromises.push(new Promise(handdle.RejectOrResolve))
+        const handle = new PromiseHandle({ uri, filename, dest, headers })
+        Allpromises.push(new Promise(handle.RejectOrResolve))
       }
 
       return Promise.all(Allpromises)
